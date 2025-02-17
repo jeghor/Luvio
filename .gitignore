@@ -1,15 +1,26 @@
+# ========== Android Studio / IntelliJ IDEA ==========
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/misc.xml
+
+# ========== Gradle ==========
+.gradle/
+build/
+app/build/
+
+# ========== Local Configuration ==========
 local.properties
+.DS_Store
+
+# ========== Native Builds ==========
+.externalNativeBuild/
+.cxx/
+
+# ========== Debug & Captures ==========
+captures/
