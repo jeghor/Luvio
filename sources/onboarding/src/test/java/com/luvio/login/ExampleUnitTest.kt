@@ -1,4 +1,4 @@
-package com.luvio.splash
+package com.luvio.login
 
 import org.junit.Test
 

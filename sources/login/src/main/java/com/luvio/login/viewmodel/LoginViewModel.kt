@@ -1,4 +1,4 @@
-package com.luvio.login.view_model
+package com.luvio.login.viewmodel
 
 import androidx.lifecycle.ViewModel
 

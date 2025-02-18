@@ -8,7 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.luvio.login.Login
-import com.luvio.login.screens.LoginScreen
+import com.luvio.login.screen.LoginScreen
+import com.luvio.login.Onboarding
+import com.luvio.login.screen.OnboardingScreen
 import com.luvio.ui_core.theme.AppTheme
 import com.luvio.ui_core.theme.LuvioTheme
 
@@ -28,8 +30,11 @@ fun LuvioApp() {
             ) {
                 NavHost(
                     navController = navController,
-                    startDestination = Login
+                    startDestination = Onboarding
                 ) {
+                    composable<Onboarding> {
+                        OnboardingScreen(navController)
+                    }
                     composable<Login> {
                         LoginScreen(navController)
                     }

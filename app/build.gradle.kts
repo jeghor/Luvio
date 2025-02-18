@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation(project(":sources:ui_core"))
+    implementation(project(":sources:onboarding"))
     implementation(project(":sources:login"))
 
     implementation(libs.androidx.core.ktx)

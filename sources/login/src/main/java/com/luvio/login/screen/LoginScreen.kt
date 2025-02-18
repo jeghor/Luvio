@@ -1,4 +1,4 @@
-package com.luvio.login.screens
+package com.luvio.login.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
