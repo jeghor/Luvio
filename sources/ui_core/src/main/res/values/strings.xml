@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Luvio</string>
+
+    <string name="email_placeholder">Введите email</string>
+    <string name="password_placeholder">Введите пароль</string>
+    <string name="login">Войти</string>
+    <string name="registration">Регистрация</string>
+    <string name="forgot_password">Забыли пароль?</string>
+</resources>

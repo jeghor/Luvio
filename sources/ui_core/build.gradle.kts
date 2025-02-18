@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ui_core"
+    namespace = "com.luvio.ui_core"
     compileSdk = 35
 
     defaultConfig {

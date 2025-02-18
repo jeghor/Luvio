@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ui_atoms"
+    namespace = "com.luvio.ui_atoms"
     compileSdk = 35
 
     defaultConfig {
