@@ -2,6 +2,18 @@
 <resources>
     <string name="app_name">Luvio</string>
 
+    <string name="next">Далее</string>
+    <string name="begin">Начать!</string>
+    <string name="skip">Пропустить</string>
+
+    <!--Onboarding screen text-->
+    <string name="first_step_title">Создавайте незабываемые свидания!</string>
+    <string name="first_step_description">Планируйте, фотографируйте и создавайте карту ваших лучших моментов</string>
+    <string name="second_step_title">Лучшие локации для свиданий</string>
+    <string name="second_step_description">Открывайте новые места и отмечайте их на вашей карте любви</string>
+    <string name="third_step_title">Запечатлейте моменты</string>
+    <string name="third_step_description">Добавляйте фото к вашим свиданиям и создавайте романтический альбом</string>
+
     <string name="email_placeholder">Введите email</string>
     <string name="password_placeholder">Введите пароль</string>
     <string name="login">Войти</string>

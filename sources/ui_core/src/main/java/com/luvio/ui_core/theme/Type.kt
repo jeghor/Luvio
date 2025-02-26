@@ -9,6 +9,12 @@ import androidx.compose.ui.unit.sp
 import com.luvio.ui_core.R
 
 val typography = Typography(
+    titleLarge = TextStyle(
+        fontFamily = FontFamily(Font(R.font.tenor_sans_regular)),
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        lineHeight = 28.sp
+    ),
     titleSmall = TextStyle(
         fontFamily = FontFamily(Font(R.font.tenor_sans_regular)),
         fontWeight = FontWeight.Normal,

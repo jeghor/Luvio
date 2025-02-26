@@ -28,7 +28,6 @@ fun LoginScreen(
             contentDescription = "Background image",
             modifier = Modifier
                 .fillMaxSize()
-
         )
 
         val (logo, emailField, passwordField, forgotPasswordText, loginButton, regButton) = createRefs()

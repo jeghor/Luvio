@@ -1,40 +1,146 @@
 package com.luvio.login.screen
 
 import android.app.Application
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.luvio.core.api.mediator.AppWithFacade
 import com.luvio.login.di.OnboardingComponent
+import com.luvio.login.viewmodel.OnboardingState
 import com.luvio.login.viewmodel.OnboardingViewModel
+import com.luvio.ui_core.R
 import com.luvio.ui_core.custom_views.LuvioButton
+import com.luvio.ui_core.theme.AppTheme
 
 @Composable
-fun OnboardingScreen(
-    navController: NavController
-) {
-    val context = LocalContext.current
-    val application = context.applicationContext as Application
+fun OnboardingScreen() {
+    val application = LocalContext.current.applicationContext as Application
     val component = remember {
         OnboardingComponent.create((application as AppWithFacade).getFacade())
     }
-
     val viewModel: OnboardingViewModel = viewModel(factory = component.viewModelFactory())
 
-    Box(
+    val stateStep = viewModel.stateOnboarding.collectAsState()
+
+    when (val step = stateStep.value) {
+        is OnboardingState.Step -> {
+            StepOnboardingContent(
+                imageId = step.imageId,
+                titleText = stringResource(step.titleId),
+                descriptionText = stringResource(step.descriptionId),
+                buttonNextText = stringResource(step.buttonNextTextId),
+                onNext = { viewModel.nextStep() },
+                onSkip = { viewModel.openLoginScreen() }
+            )
+        }
+
+        else -> viewModel.nextStep()
+    }
+}
+
+@Composable
+fun StepOnboardingContent(
+    @DrawableRes imageId: Int,
+    titleText: String,
+    descriptionText: String,
+    buttonNextText: String,
+    onNext: () -> Unit,
+    onSkip: () -> Unit
+) {
+    ConstraintLayout(
         Modifier.fillMaxSize()
     ) {
+        val (image, title, description, nextButton, skipButton) = createRefs()
+
+        val imageModifier = createGuidelineFromTop(0.15f)
+        val skipButtonModifier = createGuidelineFromBottom(0f)
+
+        Image(
+            painter = painterResource(imageId),
+            contentDescription = "step onboarding image",
+            modifier = Modifier
+                .constrainAs(image) {
+                    top.linkTo(imageModifier)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+                .width(300.dp)
+                .height(300.dp)
+                .padding(bottom = 56.dp)
+        )
+
+        Text(
+            modifier = Modifier
+                .constrainAs(title) {
+                    top.linkTo(image.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+                .padding(horizontal = AppTheme.sizes.defaultPadding),
+            text = titleText,
+            textAlign = TextAlign.Center,
+            color = AppTheme.colors.textPrimary,
+            style = AppTheme.typography.titleLarge
+        )
+
+        Text(
+            modifier = Modifier
+                .constrainAs(description) {
+                    top.linkTo(title.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+                .padding(
+                    top = 8.dp,
+                    start = AppTheme.sizes.defaultPadding,
+                    end = AppTheme.sizes.defaultPadding
+                ),
+            text = descriptionText,
+            textAlign = TextAlign.Center,
+            color = AppTheme.colors.textHint,
+            style = AppTheme.typography.bodyMedium
+        )
+
         LuvioButton(
-            modifier = Modifier.align(Alignment.Center),
-            text = "Start!"
-        ) {
-            viewModel.openLoginScreen()
-        }
+            modifier = Modifier
+                .constrainAs(nextButton) {
+                    bottom.linkTo(skipButton.top)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+                .height(AppTheme.sizes.defaultButtonHeight)
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            text = buttonNextText,
+            onClick = onNext
+        )
+
+        Text(
+            modifier = Modifier
+                .constrainAs(skipButton) {
+                    bottom.linkTo(skipButtonModifier)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+                .padding(
+                    top = AppTheme.sizes.defaultPadding,
+                    bottom = AppTheme.sizes.defaultPadding
+                )
+                .clickable { onSkip() },
+            text = stringResource(R.string.skip),
+            color = AppTheme.colors.textPrimary,
+            style = AppTheme.typography.bodyMedium,
+        )
     }
 }

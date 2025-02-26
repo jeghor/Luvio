@@ -34,8 +34,9 @@ fun LuvioApp(
                     startDestination = Onboarding
                 ) {
                     composable<Onboarding> {
-                        OnboardingScreen(navHostController)
+                        OnboardingScreen()
                     }
+
                     composable<Login> {
                         LoginScreen(navHostController)
                     }
