@@ -1,6 +1,8 @@
 [versions]
 agp = "8.8.1"
 kotlin = "2.0.21"
+inject = "1"
+dagger = "2.55"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -15,6 +17,7 @@ navVersion = "2.8.7"
 constraintlayout = "1.1.0"
 serialization = "1.8.0"
 serialization-plugin = "2.0.20"
+navigationRuntimeKtx = "2.8.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,10 +39,15 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintlayout" }
 serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+dagger2 = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
+dagger2-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
+java-inject = { group = "javax.inject", name = "javax.inject", version.ref = "inject" }
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "kotlin-kapt" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization-plugin" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
