@@ -1,4 +1,4 @@
-package com.luvio
+package com.luvio.main
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Surface

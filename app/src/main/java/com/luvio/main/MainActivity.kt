@@ -1,4 +1,4 @@
-package com.luvio
+package com.luvio.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

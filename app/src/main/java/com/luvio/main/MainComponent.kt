@@ -1,4 +1,4 @@
-package com.luvio
+package com.luvio.main
 
 import com.luvio.core.api.mediator.ProvidersFacade
 import dagger.Component
