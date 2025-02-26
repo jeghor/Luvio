@@ -9,8 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.luvio.login.Login
 import com.luvio.login.Onboarding
+import com.luvio.login.Registration
 import com.luvio.login.screen.LoginScreen
 import com.luvio.login.screen.OnboardingScreen
+import com.luvio.login.screen.RegistrationScreen
 import com.luvio.ui_core.theme.AppTheme
 import com.luvio.ui_core.theme.LuvioTheme
 
@@ -39,6 +41,15 @@ fun LuvioApp(
 
                     composable<Login> {
                         LoginScreen(navHostController)
+                    }
+
+                    composable<Registration>(
+                        enterTransition = { customSlideInHorizontally(isPop = false) },
+                        exitTransition = { customSlideOutHorizontally(isPop = false) },
+                        popEnterTransition = { customSlideInHorizontally(isPop = true) },
+                        popExitTransition = { customSlideOutHorizontally(isPop = true) }
+                    ) {
+                        RegistrationScreen()
                     }
                 }
             }

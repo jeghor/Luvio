@@ -16,7 +16,10 @@
 
     <string name="email_placeholder">Введите email</string>
     <string name="password_placeholder">Введите пароль</string>
+    <string name="confirm_password_placeholder">Подтвердите пароль</string>
     <string name="login">Войти</string>
     <string name="registration">Регистрация</string>
     <string name="forgot_password">Забыли пароль?</string>
+
+    <string name="registration_description">Подтверждение регистрации будет выслано Вам на email. После подтверждения регистрации, Вы сможете войти в аккаунт используя свой email и введенный пароль</string>
 </resources>

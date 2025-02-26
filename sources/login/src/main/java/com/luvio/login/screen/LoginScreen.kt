@@ -1,6 +1,7 @@
 package com.luvio.login.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -9,6 +10,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import com.luvio.login.Registration
 import com.luvio.ui_core.custom_views.LuvioButton
 import com.luvio.ui_core.custom_views.LuvioTextField
 import com.luvio.ui_core.theme.AppTheme
@@ -112,7 +114,10 @@ fun LoginScreen(
                 .padding(
                     top = AppTheme.sizes.defaultPadding,
                     bottom = AppTheme.sizes.defaultPadding
-                ),
+                )
+                .clickable {
+                    navController.navigate(Registration)
+                },
             text = stringResource(com.luvio.ui_core.R.string.registration),
             color = AppTheme.colors.textPrimary,
             style = AppTheme.typography.bodyMedium
