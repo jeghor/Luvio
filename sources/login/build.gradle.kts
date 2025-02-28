@@ -40,6 +40,7 @@ dependencies {
     implementation(project(":sources:ui_core"))
     implementation(project(":sources:ui_atoms"))
     implementation(project(":sources:login:api"))
+    implementation(project(":sources:network:api"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -61,4 +62,6 @@ dependencies {
     //dagger
     implementation(libs.dagger2)
     kapt(libs.dagger2.compiler)
+
+    implementation(libs.ktor.core)
 }

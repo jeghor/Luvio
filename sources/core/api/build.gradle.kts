@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-
+    api(project(":sources:network:api"))
     implementation(libs.java.inject)
 
     implementation(libs.androidx.core.ktx)

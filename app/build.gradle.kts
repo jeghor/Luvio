@@ -43,6 +43,7 @@ android {
 dependencies {
     implementation(project(":sources:core:api"))
     implementation(project(":sources:core:impl"))
+    implementation(project(":sources:network"))
     implementation(project(":sources:ui_core"))
     implementation(project(":sources:onboarding"))
     implementation(project(":sources:login"))
@@ -68,4 +69,6 @@ dependencies {
     //dagger
     implementation(libs.dagger2)
     kapt(libs.dagger2.compiler)
+
+    implementation(libs.ktor.core)
 }

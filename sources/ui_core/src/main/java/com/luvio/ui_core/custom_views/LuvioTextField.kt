@@ -22,7 +22,8 @@ fun LuvioTextField(
     value: String? = null,
     placeholder: String? = null,
     isPassword: Boolean = false,
-    @DrawableRes endIcon: Int
+    @DrawableRes endIcon: Int,
+    onTextListener: (value: String) -> Unit = {}
 ) {
     var value by remember { mutableStateOf(value) }
 
@@ -65,6 +66,7 @@ fun LuvioTextField(
             )
         },
         onValueChange = {
+            onTextListener(it)
             value = it
         }
     )

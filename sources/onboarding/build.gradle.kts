@@ -62,4 +62,6 @@ dependencies {
     //dagger
     implementation(libs.dagger2)
     kapt(libs.dagger2.compiler)
+
+    implementation(libs.ktor.core)
 }

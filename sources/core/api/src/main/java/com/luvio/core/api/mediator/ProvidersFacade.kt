@@ -1,3 +1,5 @@
 package com.luvio.core.api.mediator
 
-interface ProvidersFacade: MediatorsProvider, AppProvider
+import com.luvio.api.di.NetworkProvider
+
+interface ProvidersFacade : MediatorsProvider, AppProvider, NetworkProvider

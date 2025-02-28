@@ -1,29 +1,43 @@
 package com.luvio.login.screen
 
+import android.app.Application
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.luvio.core.api.mediator.AppWithFacade
 import com.luvio.login.Registration
+import com.luvio.login.di.LoginComponent
+import com.luvio.login.viewmodel.LoginViewModel
+import com.luvio.ui_atoms.R
 import com.luvio.ui_core.custom_views.LuvioButton
 import com.luvio.ui_core.custom_views.LuvioTextField
 import com.luvio.ui_core.theme.AppTheme
-import com.luvio.ui_atoms.R
 
 @Composable
 fun LoginScreen(
     navController: NavController
 ) {
+    val application = LocalContext.current.applicationContext as Application
+    val component = remember {
+        LoginComponent.create((application as AppWithFacade).getFacade())
+    }
+
+    val viewModel: LoginViewModel = viewModel(factory = component.viewModelFactory())
+
+    val stateLogin = viewModel.stateLogin.collectAsState()
+
     ConstraintLayout(
         modifier = Modifier.fillMaxSize()
     ) {
-
         val background = painterResource(id = R.drawable.background)
         Image(
             painter = background,
@@ -31,6 +45,9 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxSize()
         )
+
+        val email = remember { mutableStateOf("") }
+        val password = remember { mutableStateOf("") }
 
         val (logo, emailField, passwordField, forgotPasswordText, loginButton, regButton) = createRefs()
 
@@ -57,7 +74,9 @@ fun LoginScreen(
                 .padding(horizontal = AppTheme.sizes.defaultPadding),
             placeholder = stringResource(com.luvio.ui_core.R.string.email_placeholder),
             endIcon = R.drawable.ic_email
-        )
+        ) {
+            email.value = it
+        }
 
         LuvioTextField(
             modifier = Modifier
@@ -74,7 +93,9 @@ fun LoginScreen(
             placeholder = stringResource(com.luvio.ui_core.R.string.password_placeholder),
             isPassword = true,
             endIcon = R.drawable.ic_lock
-        )
+        ) {
+            password.value = it
+        }
 
         Text(
             modifier = Modifier
@@ -102,7 +123,9 @@ fun LoginScreen(
                     end = AppTheme.sizes.defaultPadding
                 ),
             text = stringResource(com.luvio.ui_core.R.string.login)
-        ) {}
+        ) {
+            viewModel.login(email.value, password.value)
+        }
 
         Text(
             modifier = Modifier
