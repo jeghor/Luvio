@@ -25,15 +25,13 @@ fun LuvioTextField(
     @DrawableRes endIcon: Int,
     onTextListener: (value: String) -> Unit = {}
 ) {
-    var value by remember { mutableStateOf(value) }
-
     TextField(
         modifier = modifier
             .fillMaxWidth()
             .border(
-                BorderStroke(AppTheme.sizes.defaultBorder, AppTheme.colors.primary),
+                BorderStroke(AppTheme.sizes.border, AppTheme.colors.primary),
                 shape = RoundedCornerShape(
-                    AppTheme.sizes.defaultRounded
+                    AppTheme.sizes.rounded
                 )
             ),
         textStyle = AppTheme.typography.bodyMedium,
@@ -48,7 +46,7 @@ fun LuvioTextField(
             disabledTextColor = AppTheme.colors.textPrimary,
             focusedTextColor = AppTheme.colors.textPrimary
         ),
-        shape = RoundedCornerShape(AppTheme.sizes.defaultRounded),
+        shape = RoundedCornerShape(AppTheme.sizes.rounded),
         value = value ?: "",
         placeholder = {
             Text(
@@ -67,7 +65,6 @@ fun LuvioTextField(
         },
         onValueChange = {
             onTextListener(it)
-            value = it
         }
     )
 }

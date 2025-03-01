@@ -5,6 +5,11 @@
     <string name="next">Далее</string>
     <string name="begin">Начать!</string>
     <string name="skip">Пропустить</string>
+    <string name="ok">Ок</string>
+
+    <!--Error text-->
+    <string name="incorrect_data">Проверьте введенные данные</string>
+    <string name="something_went_wrong">Упс(\n что-то пошло не так</string>
 
     <!--Onboarding screen text-->
     <string name="first_step_title">Создавайте незабываемые свидания!</string>

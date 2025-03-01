@@ -87,7 +87,7 @@ fun StepOnboardingContent(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
-                .padding(horizontal = AppTheme.sizes.defaultPadding),
+                .padding(horizontal = AppTheme.sizes.padding),
             text = titleText,
             textAlign = TextAlign.Center,
             color = AppTheme.colors.textPrimary,
@@ -103,8 +103,8 @@ fun StepOnboardingContent(
                 }
                 .padding(
                     top = 8.dp,
-                    start = AppTheme.sizes.defaultPadding,
-                    end = AppTheme.sizes.defaultPadding
+                    start = AppTheme.sizes.padding,
+                    end = AppTheme.sizes.padding
                 ),
             text = descriptionText,
             textAlign = TextAlign.Center,
@@ -119,7 +119,7 @@ fun StepOnboardingContent(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
-                .height(AppTheme.sizes.defaultButtonHeight)
+                .height(AppTheme.sizes.buttonHeight)
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
             text = buttonNextText,
@@ -134,8 +134,8 @@ fun StepOnboardingContent(
                     end.linkTo(parent.end)
                 }
                 .padding(
-                    top = AppTheme.sizes.defaultPadding,
-                    bottom = AppTheme.sizes.defaultPadding
+                    top = AppTheme.sizes.padding,
+                    bottom = AppTheme.sizes.padding
                 )
                 .clickable { onSkip() },
             text = stringResource(R.string.skip),

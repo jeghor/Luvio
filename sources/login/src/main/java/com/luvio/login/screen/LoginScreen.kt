@@ -20,7 +20,9 @@ import com.luvio.login.viewmodel.LoginViewModel
 import com.luvio.ui_atoms.R
 import com.luvio.ui_core.custom_views.LuvioButton
 import com.luvio.ui_core.custom_views.LuvioTextField
+import com.luvio.ui_core.dialog.LuvioBottomDialog
 import com.luvio.ui_core.theme.AppTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
@@ -32,8 +34,40 @@ fun LoginScreen(
     }
 
     val viewModel: LoginViewModel = viewModel(factory = component.viewModelFactory())
+    val scope = rememberCoroutineScope()
 
-    val stateLogin = viewModel.stateLogin.collectAsState()
+    val showIncorrectDataDialog = remember { mutableStateOf(false) }
+    val showSomethingWentWrongDialog = remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        launch {
+            viewModel.eventIncorrectData.collect { showIncorrectDataDialog.value = true }
+        }
+        launch {
+            viewModel.eventSuccessLogin.collect {
+                // navigate to HOME
+            }
+        }
+        launch {
+            viewModel.eventSomethingWentWrong.collect { showIncorrectDataDialog.value = true }
+        }
+    }
+
+    if (showIncorrectDataDialog.value) {
+        LuvioBottomDialog(
+            scope,
+            dragHandle = null,
+            message = stringResource(com.luvio.ui_core.R.string.incorrect_data)
+        ) { showIncorrectDataDialog.value = it }
+    }
+
+    if (showSomethingWentWrongDialog.value) {
+        LuvioBottomDialog(
+            scope,
+            dragHandle = null,
+            message = stringResource(com.luvio.ui_core.R.string.something_went_wrong)
+        ) { showSomethingWentWrongDialog.value = it }
+    }
 
     ConstraintLayout(
         modifier = Modifier.fillMaxSize()
@@ -71,7 +105,8 @@ fun LoginScreen(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
-                .padding(horizontal = AppTheme.sizes.defaultPadding),
+                .padding(horizontal = AppTheme.sizes.padding),
+            value = email.value,
             placeholder = stringResource(com.luvio.ui_core.R.string.email_placeholder),
             endIcon = R.drawable.ic_email
         ) {
@@ -86,10 +121,11 @@ fun LoginScreen(
                     end.linkTo(parent.end)
                 }
                 .padding(
-                    top = AppTheme.sizes.defaultPadding,
-                    start = AppTheme.sizes.defaultPadding,
-                    end = AppTheme.sizes.defaultPadding
+                    top = AppTheme.sizes.padding,
+                    start = AppTheme.sizes.padding,
+                    end = AppTheme.sizes.padding
                 ),
+            value = password.value,
             placeholder = stringResource(com.luvio.ui_core.R.string.password_placeholder),
             isPassword = true,
             endIcon = R.drawable.ic_lock
@@ -103,7 +139,7 @@ fun LoginScreen(
                     top.linkTo(passwordField.bottom)
                     end.linkTo(parent.end)
                 }
-                .padding(AppTheme.sizes.defaultPadding),
+                .padding(AppTheme.sizes.padding),
             text = stringResource(com.luvio.ui_core.R.string.forgot_password),
             color = AppTheme.colors.textPrimary,
             style = AppTheme.typography.bodyMedium
@@ -116,11 +152,10 @@ fun LoginScreen(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
-                .height(AppTheme.sizes.defaultButtonHeight)
+                .height(AppTheme.sizes.buttonHeight)
                 .fillMaxWidth()
                 .padding(
-                    start = AppTheme.sizes.defaultPadding,
-                    end = AppTheme.sizes.defaultPadding
+                    start = AppTheme.sizes.padding, end = AppTheme.sizes.padding
                 ),
             text = stringResource(com.luvio.ui_core.R.string.login)
         ) {
@@ -135,8 +170,7 @@ fun LoginScreen(
                     end.linkTo(parent.end)
                 }
                 .padding(
-                    top = AppTheme.sizes.defaultPadding,
-                    bottom = AppTheme.sizes.defaultPadding
+                    top = AppTheme.sizes.padding, bottom = AppTheme.sizes.padding
                 )
                 .clickable {
                     navController.navigate(Registration)

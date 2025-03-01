@@ -4,8 +4,7 @@ import androidx.lifecycle.*
 import com.luvio.api.NetworkResult
 import com.luvio.api.api.AuthService
 import com.luvio.api.auth.LoginRequest
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,8 +12,14 @@ class LoginViewModel(
     private val authService: AuthService
 ) : ViewModel() {
 
-    private val _stateLogin = MutableStateFlow<String>("")
-    val stateLogin = _stateLogin.asStateFlow()
+    private val _eventSuccessLogin = MutableSharedFlow<Unit>()
+    val eventSuccessLogin = _eventSuccessLogin.asSharedFlow()
+
+    private val _eventIncorrectData = MutableSharedFlow<Unit>()
+    val eventIncorrectData = _eventIncorrectData.asSharedFlow()
+
+    private val _eventSomethingWentWrong = MutableSharedFlow<Unit>()
+    val eventSomethingWentWrong = _eventSomethingWentWrong.asSharedFlow()
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
@@ -26,17 +31,17 @@ class LoginViewModel(
             )
 
             when (result) {
-                is NetworkResult.Success<*> -> {
-                    _stateLogin.emit("Success")
-                }
+                is NetworkResult.Success<*> -> _eventSuccessLogin.emit(Unit)
 
                 is NetworkResult.Error<*> -> {
-                    _stateLogin.emit("Error")
+                    if (result.error.status.value == 404) {
+                        _eventIncorrectData.emit(Unit)
+                    } else {
+                        _eventSomethingWentWrong.emit(Unit)
+                    }
                 }
 
-                is NetworkResult.Exception<*> -> {
-                    _stateLogin.emit("Exception")
-                }
+                is NetworkResult.Exception<*> -> _eventSomethingWentWrong.emit(Unit)
             }
         }
     }

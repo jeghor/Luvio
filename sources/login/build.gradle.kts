@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":sources:core"))
     implementation(project(":sources:core:api"))
     implementation(project(":sources:ui_core"))
     implementation(project(":sources:ui_atoms"))

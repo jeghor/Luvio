@@ -19,7 +19,7 @@ fun TextButton(
 ) {
     Row(
         modifier = modifier
-            .height(AppTheme.sizes.defaultTextButtonHeight),
+            .height(AppTheme.sizes.textButtonHeight),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(

@@ -22,7 +22,7 @@ fun LuvioButton(
 ) {
     Button(
         modifier = modifier,
-        shape = RoundedCornerShape(AppTheme.sizes.defaultRounded),
+        shape = RoundedCornerShape(AppTheme.sizes.rounded),
         colors = buttonColors(
             containerColor = if (filled) AppTheme.colors.primary else AppTheme.colors.background,
             contentColor = if (filled) AppTheme.colors.background else AppTheme.colors.primary
@@ -30,7 +30,7 @@ fun LuvioButton(
         border = if (filled) {
             BorderStroke(0.dp, Color.White)
         } else {
-            BorderStroke(AppTheme.sizes.defaultBorder, AppTheme.colors.primary)
+            BorderStroke(AppTheme.sizes.border, AppTheme.colors.primary)
         },
         onClick = onClick
     ) {
