@@ -49,7 +49,7 @@ fun LuvioApp(
                         popEnterTransition = { customSlideInHorizontally(isPop = true) },
                         popExitTransition = { customSlideOutHorizontally(isPop = true) }
                     ) {
-                        RegistrationScreen()
+                        RegistrationScreen(navHostController)
                     }
                 }
             }

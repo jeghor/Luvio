@@ -2,11 +2,9 @@ package com.luvio.impl
 
 import com.luvio.api.*
 import com.luvio.api.api.AuthService
-import com.luvio.api.auth.*
+import com.luvio.api.model.auth.*
 import io.ktor.client.HttpClient
-import io.ktor.client.request.post
-import io.ktor.client.request.setBody
-import io.ktor.client.request.url
+import io.ktor.client.request.*
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 

@@ -1,16 +1,24 @@
 package com.luvio.api
 
-import io.ktor.client.call.body
-import io.ktor.client.statement.HttpResponse
-import io.ktor.http.HttpStatusCode
+import com.luvio.api.model.ApiError
+import io.ktor.client.call.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
 
 suspend inline fun <reified T : Any> HttpResponse.handleApi(): NetworkResult<T> {
     return try {
         when (status) {
-            HttpStatusCode.OK -> NetworkResult.Success(body())
-            else -> NetworkResult.Error(body())
+            HttpStatusCode.OK -> {
+                val data = body<T>()
+                NetworkResult.Success(data)
+            }
+
+            else -> {
+                val errorBody = body<ApiError>()
+                NetworkResult.Error(status, errorBody)
+            }
         }
     } catch (e: Throwable) {
-        NetworkResult.Exception(e = e)
+        NetworkResult.Exception(e)
     }
 }

@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.luvio.ui_core.theme.AppColors
 import com.luvio.ui_core.theme.AppTheme
 
 @Composable
@@ -18,6 +19,7 @@ fun LuvioButton(
     text: String,
     filled: Boolean = true,
     smallText: Boolean = false,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     Button(
@@ -25,14 +27,17 @@ fun LuvioButton(
         shape = RoundedCornerShape(AppTheme.sizes.rounded),
         colors = buttonColors(
             containerColor = if (filled) AppTheme.colors.primary else AppTheme.colors.background,
-            contentColor = if (filled) AppTheme.colors.background else AppTheme.colors.primary
+            contentColor = if (filled) AppTheme.colors.background else AppTheme.colors.primary,
+            disabledContainerColor = if (filled) AppColors.lightPink else AppTheme.colors.background,
+            disabledContentColor = if (filled) AppTheme.colors.background else AppTheme.colors.primary
         ),
         border = if (filled) {
             BorderStroke(0.dp, Color.White)
         } else {
             BorderStroke(AppTheme.sizes.border, AppTheme.colors.primary)
         },
-        onClick = onClick
+        onClick = onClick,
+        enabled = enabled
     ) {
         Text(
             text = text,

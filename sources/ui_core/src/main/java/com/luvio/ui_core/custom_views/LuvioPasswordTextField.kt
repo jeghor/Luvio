@@ -3,19 +3,25 @@ package com.luvio.ui_core.custom_views
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.luvio.ui_core.theme.AppTheme
 
 @Composable
-fun LuvioTextField(
+fun LuvioPasswordTextField(
     modifier: Modifier,
     value: String? = null,
     error: String? = null,
@@ -24,6 +30,22 @@ fun LuvioTextField(
     @DrawableRes endIcon: Int,
     onTextListener: (value: String) -> Unit = {}
 ) {
+    var passwordVisible by remember { mutableStateOf(false) }
+    val interactionSource = remember { MutableInteractionSource() }
+
+    LaunchedEffect(interactionSource) {
+        interactionSource.interactions.collect { interaction ->
+            when (interaction) {
+                is PressInteraction.Press -> {
+                    passwordVisible = true
+                }
+                is PressInteraction.Release, is PressInteraction.Cancel -> {
+                    passwordVisible = false
+                }
+            }
+        }
+    }
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -61,9 +83,23 @@ fun LuvioTextField(
                     color = AppTheme.colors.textHint
                 )
             },
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Password,
+                autoCorrectEnabled = false
+            ),
             trailingIcon = {
                 Icon(
-                    painterResource(endIcon),
+                    modifier = Modifier.pointerInput(Unit) {
+                        detectTapGestures(
+                            onPress = {
+                                passwordVisible = true
+                                tryAwaitRelease()
+                                passwordVisible = false
+                            }
+                        )
+                    },
+                    painter = painterResource(endIcon),
                     tint = AppTheme.colors.primary,
                     contentDescription = "End Icon"
                 )
@@ -99,7 +135,7 @@ fun LuvioTextField(
 
 @Preview
 @Composable
-fun LuvioTextFieldPreview() {
+fun LuvioPasswordTextFieldPreview() {
     Surface(
         Modifier.padding(32.dp)
     ) {

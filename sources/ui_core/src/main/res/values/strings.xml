@@ -26,5 +26,12 @@
     <string name="registration">Регистрация</string>
     <string name="forgot_password">Забыли пароль?</string>
 
-    <string name="registration_description">Подтверждение регистрации будет выслано Вам на email. После подтверждения регистрации, Вы сможете войти в аккаунт используя свой email и введенный пароль</string>
+
+    <string name="success_registration">Поздравляем!\n Вы успешно зарегестрировались</string>
+    <string name="error_registration">Попробуйте еще раз</string>
+    <string name="error_email_incorrect">Проверьте введенный email</string>
+    <string name="error_password_incorrect">Пароль не проходит валидацию</string>
+    <string name="error_password_mismatch">Пароли не совпадают</string>
+
+    <string name="registration_description">Код-подтверждение регистрации будет выслано Вам на email. Вам нужно будет ввести его в поле вода кода. После подтверждения регистрации, Вы сможете войти в аккаунт используя свой email и введенный пароль</string>
 </resources>

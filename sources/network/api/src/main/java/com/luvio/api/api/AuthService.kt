@@ -1,10 +1,10 @@
 package com.luvio.api.api
 
 import com.luvio.api.NetworkResult
-import com.luvio.api.auth.EmailVerificationRequest
-import com.luvio.api.auth.LoginRequest
-import com.luvio.api.auth.RegistrationRequest
-import com.luvio.api.auth.RegistrationResponse
+import com.luvio.api.model.auth.EmailVerificationRequest
+import com.luvio.api.model.auth.LoginRequest
+import com.luvio.api.model.auth.RegistrationRequest
+import com.luvio.api.model.auth.RegistrationResponse
 
 interface AuthService {
 

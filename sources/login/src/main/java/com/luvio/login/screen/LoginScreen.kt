@@ -18,8 +18,7 @@ import com.luvio.login.Registration
 import com.luvio.login.di.LoginComponent
 import com.luvio.login.viewmodel.LoginViewModel
 import com.luvio.ui_atoms.R
-import com.luvio.ui_core.custom_views.LuvioButton
-import com.luvio.ui_core.custom_views.LuvioTextField
+import com.luvio.ui_core.custom_views.*
 import com.luvio.ui_core.dialog.LuvioBottomDialog
 import com.luvio.ui_core.theme.AppTheme
 import kotlinx.coroutines.launch
@@ -37,20 +36,13 @@ fun LoginScreen(
     val scope = rememberCoroutineScope()
 
     val showIncorrectDataDialog = remember { mutableStateOf(false) }
+    val showSuccessLoginDialog = remember { mutableStateOf(false) }
     val showSomethingWentWrongDialog = remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        launch {
-            viewModel.eventIncorrectData.collect { showIncorrectDataDialog.value = true }
-        }
-        launch {
-            viewModel.eventSuccessLogin.collect {
-                // navigate to HOME
-            }
-        }
-        launch {
-            viewModel.eventSomethingWentWrong.collect { showIncorrectDataDialog.value = true }
-        }
+        launch { viewModel.eventIncorrectData.collect { showIncorrectDataDialog.value = true } }
+        launch { viewModel.eventSuccessLogin.collect { showSuccessLoginDialog.value = true } }
+        launch { viewModel.eventSomethingWentWrong.collect { showIncorrectDataDialog.value = true } }
     }
 
     if (showIncorrectDataDialog.value) {
@@ -59,6 +51,14 @@ fun LoginScreen(
             dragHandle = null,
             message = stringResource(com.luvio.ui_core.R.string.incorrect_data)
         ) { showIncorrectDataDialog.value = it }
+    }
+
+    if (showSuccessLoginDialog.value) {
+        LuvioBottomDialog(
+            scope,
+            dragHandle = null,
+            message = "Успешный логин!"
+        ) { showSuccessLoginDialog.value = it }
     }
 
     if (showSomethingWentWrongDialog.value) {
@@ -85,7 +85,7 @@ fun LoginScreen(
 
         val (logo, emailField, passwordField, forgotPasswordText, loginButton, regButton) = createRefs()
 
-        val logoModifier = createGuidelineFromTop(0.2f)
+        val logoModifier = createGuidelineFromTop(0f)
         val loginButtonModifier = createGuidelineFromBottom(0f)
 
         Image(
@@ -113,7 +113,7 @@ fun LoginScreen(
             email.value = it
         }
 
-        LuvioTextField(
+        LuvioPasswordTextField(
             modifier = Modifier
                 .constrainAs(passwordField) {
                     top.linkTo(emailField.bottom)
@@ -127,7 +127,6 @@ fun LoginScreen(
                 ),
             value = password.value,
             placeholder = stringResource(com.luvio.ui_core.R.string.password_placeholder),
-            isPassword = true,
             endIcon = R.drawable.ic_lock
         ) {
             password.value = it
@@ -172,6 +171,7 @@ fun LoginScreen(
                 .padding(
                     top = AppTheme.sizes.padding, bottom = AppTheme.sizes.padding
                 )
+                .imePadding()
                 .clickable {
                     navController.navigate(Registration)
                 },

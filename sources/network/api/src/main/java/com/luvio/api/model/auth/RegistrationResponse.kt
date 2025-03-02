@@ -1,4 +1,4 @@
-package com.luvio.api.auth
+package com.luvio.api.model.auth
 
 import kotlinx.serialization.Serializable
 

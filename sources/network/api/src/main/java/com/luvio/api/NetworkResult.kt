@@ -1,10 +1,10 @@
 package com.luvio.api
 
-import io.ktor.client.statement.HttpResponse
+import com.luvio.api.model.ApiError
+import io.ktor.http.HttpStatusCode
 
-sealed interface NetworkResult<T : Any> {
-
-    class Success<T : Any>(val data: T) : NetworkResult<T>
-    class Error<T : Any>(val error: HttpResponse) : NetworkResult<T>
-    class Exception<T : Any>(val e: Throwable) : NetworkResult<T>
+sealed class NetworkResult<out T : Any> {
+    data class Success<out T : Any>(val data: T) : NetworkResult<T>()
+    data class Error(val statusCode: HttpStatusCode, val error: ApiError) : NetworkResult<Nothing>()
+    data class Exception(val exception: Throwable) : NetworkResult<Nothing>()
 }

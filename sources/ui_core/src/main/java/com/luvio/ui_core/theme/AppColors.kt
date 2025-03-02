@@ -7,15 +7,19 @@ import androidx.compose.ui.graphics.Color
 object AppColors {
     val primary = Color(0xFFFF5E78)
     val secondary = Color(0xFFF6F6F6)
+    val error = Color(0xFFE53935)
     val background = Color(0xFFFFFFFF)
     val transparent = Color(0x00000000)
     val textPrimary = Color(0xFF333333)
     val textHint = Color(0xFF888888)
+
+    val lightPink = Color(0xFFFFC2C8)
 }
 
 interface ColorPalette {
     val primary: Color
     val secondary: Color
+    val error: Color
     val background: Color
     val transparent: Color
     val textPrimary: Color
@@ -27,6 +31,7 @@ interface ColorPalette {
 fun lightColorPalette(): ColorPalette = object : ColorPalette {
     override val primary: Color = AppColors.primary
     override val secondary: Color = AppColors.secondary
+    override val error: Color = AppColors.error
     override val background: Color = AppColors.background
     override val transparent: Color = AppColors.transparent
     override val textPrimary: Color = AppColors.textPrimary

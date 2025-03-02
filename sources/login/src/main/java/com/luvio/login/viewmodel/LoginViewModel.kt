@@ -3,8 +3,9 @@ package com.luvio.login.viewmodel
 import androidx.lifecycle.*
 import com.luvio.api.NetworkResult
 import com.luvio.api.api.AuthService
-import com.luvio.api.auth.LoginRequest
-import kotlinx.coroutines.flow.*
+import com.luvio.api.model.auth.LoginRequest
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,15 +34,15 @@ class LoginViewModel(
             when (result) {
                 is NetworkResult.Success<*> -> _eventSuccessLogin.emit(Unit)
 
-                is NetworkResult.Error<*> -> {
-                    if (result.error.status.value == 404) {
+                is NetworkResult.Error -> {
+                    if (result.statusCode.value == 404) {
                         _eventIncorrectData.emit(Unit)
                     } else {
                         _eventSomethingWentWrong.emit(Unit)
                     }
                 }
 
-                is NetworkResult.Exception<*> -> _eventSomethingWentWrong.emit(Unit)
+                is NetworkResult.Exception -> _eventSomethingWentWrong.emit(Unit)
             }
         }
     }
