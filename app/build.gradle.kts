@@ -48,6 +48,8 @@ dependencies {
     implementation(project(":sources:onboarding"))
     implementation(project(":sources:login"))
     implementation(project(":sources:login:api"))
+    implementation(project(":sources:main_workspace"))
+    implementation(project(":sources:main_workspace:api"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

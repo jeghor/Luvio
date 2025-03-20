@@ -34,4 +34,10 @@
     <string name="error_password_mismatch">Пароли не совпадают</string>
 
     <string name="registration_description">Код-подтверждение регистрации будет выслано Вам на email. Вам нужно будет ввести его в поле вода кода. После подтверждения регистрации, Вы сможете войти в аккаунт используя свой email и введенный пароль</string>
+
+    <!--Main workspace-->
+    <string name="bottom_home">Главная</string>
+    <string name="bottom_map">Карта</string>
+    <string name="bottom_favorites">Избранное</string>
+    <string name="bottom_profile">Профиль</string>
 </resources>

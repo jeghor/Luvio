@@ -59,7 +59,9 @@ fun StepOnboardingContent(
     onSkip: () -> Unit
 ) {
     ConstraintLayout(
-        Modifier.fillMaxSize()
+        Modifier
+            .fillMaxSize()
+            .padding(WindowInsets.navigationBars.asPaddingValues())
     ) {
         val (image, title, description, nextButton, skipButton) = createRefs()
 

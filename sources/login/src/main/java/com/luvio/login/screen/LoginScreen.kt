@@ -36,13 +36,15 @@ fun LoginScreen(
     val scope = rememberCoroutineScope()
 
     val showIncorrectDataDialog = remember { mutableStateOf(false) }
-    val showSuccessLoginDialog = remember { mutableStateOf(false) }
     val showSomethingWentWrongDialog = remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         launch { viewModel.eventIncorrectData.collect { showIncorrectDataDialog.value = true } }
-        launch { viewModel.eventSuccessLogin.collect { showSuccessLoginDialog.value = true } }
-        launch { viewModel.eventSomethingWentWrong.collect { showIncorrectDataDialog.value = true } }
+        launch {
+            viewModel.eventSomethingWentWrong.collect {
+                showIncorrectDataDialog.value = true
+            }
+        }
     }
 
     if (showIncorrectDataDialog.value) {
@@ -51,14 +53,6 @@ fun LoginScreen(
             dragHandle = null,
             message = stringResource(com.luvio.ui_core.R.string.incorrect_data)
         ) { showIncorrectDataDialog.value = it }
-    }
-
-    if (showSuccessLoginDialog.value) {
-        LuvioBottomDialog(
-            scope,
-            dragHandle = null,
-            message = "Успешный логин!"
-        ) { showSuccessLoginDialog.value = it }
     }
 
     if (showSomethingWentWrongDialog.value) {
@@ -70,7 +64,9 @@ fun LoginScreen(
     }
 
     ConstraintLayout(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(WindowInsets.navigationBars.asPaddingValues())
     ) {
         val background = painterResource(id = R.drawable.background)
         Image(

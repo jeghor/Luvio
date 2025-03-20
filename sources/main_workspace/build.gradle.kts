@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.luvio.login"
+    namespace = "com.luvio.dashboard"
     compileSdk = 35
 
     defaultConfig {
@@ -36,12 +36,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":sources:core"))
     implementation(project(":sources:core:api"))
     implementation(project(":sources:ui_core"))
     implementation(project(":sources:ui_atoms"))
-    implementation(project(":sources:login:api"))
-    implementation(project(":sources:network:api"))
     implementation(project(":sources:main_workspace:api"))
 
     implementation(libs.androidx.core.ktx)
@@ -60,10 +57,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
     //dagger
     implementation(libs.dagger2)
     kapt(libs.dagger2.compiler)
-
     implementation(libs.ktor.core)
 }

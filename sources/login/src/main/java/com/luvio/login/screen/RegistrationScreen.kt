@@ -36,7 +36,9 @@ fun RegistrationScreen(
     val scope = rememberCoroutineScope()
 
     ConstraintLayout(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(WindowInsets.navigationBars.asPaddingValues())
     ) {
         val showSuccessRegistrationDialog = remember { mutableStateOf(false) }
         val errorMessage = remember { mutableStateOf<String?>(null) }

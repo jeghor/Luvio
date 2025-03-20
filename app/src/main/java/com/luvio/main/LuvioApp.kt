@@ -5,8 +5,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import androidx.navigation.compose.*
+import com.luvio.dashboard.*
 import com.luvio.login.Login
 import com.luvio.login.Onboarding
 import com.luvio.login.Registration
@@ -25,11 +25,8 @@ fun LuvioApp(
             modifier = Modifier.fillMaxSize(),
             color = AppTheme.colors.background
         ) {
-
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(WindowInsets.navigationBars.asPaddingValues())
+                modifier = Modifier.fillMaxSize()
             ) {
                 NavHost(
                     navController = navHostController,
@@ -50,6 +47,10 @@ fun LuvioApp(
                         popExitTransition = { customSlideOutHorizontally(isPop = true) }
                     ) {
                         RegistrationScreen(navHostController)
+                    }
+
+                    composable<Workspace> {
+                        WorkspaceScreen(navHostController)
                     }
                 }
             }

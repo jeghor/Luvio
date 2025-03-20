@@ -6,15 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.luvio.core.api.mediator.ActivityProvider
-import com.luvio.core.api.mediator.AppWithFacade
-import com.luvio.core.api.mediator.Navigator
+import com.luvio.core.api.mediator.*
 import javax.inject.Inject
 
 class MainActivity : ComponentActivity(), Navigator {
 
-    var navController: NavHostController? = null
-        private set
+    private var navController: NavHostController? = null
 
     @Inject
     lateinit var activityProvider: ActivityProvider
@@ -37,7 +34,7 @@ class MainActivity : ComponentActivity(), Navigator {
 
     override fun onPause() {
         super.onPause()
-        activityProvider.clearCurrentActivity(this)
+        activityProvider.clearCurrentActivity()
     }
 
     override fun getController(): NavHostController? = navController

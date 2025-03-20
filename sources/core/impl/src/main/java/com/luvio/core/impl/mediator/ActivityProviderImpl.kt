@@ -14,7 +14,7 @@ class ActivityProviderImpl(app: Application) : ActivityProvider {
         activityRef = WeakReference(activity)
     }
 
-    override fun clearCurrentActivity(activity: Activity) {
+    override fun clearCurrentActivity() {
         activityRef?.clear()
     }
 
@@ -33,17 +33,17 @@ class ActivityProviderImpl(app: Application) : ActivityProvider {
             }
 
             override fun onActivityPaused(activity: Activity) {
-                clearCurrentActivity(activity)
+                clearCurrentActivity()
             }
 
             override fun onActivityStopped(activity: Activity) {
-                clearCurrentActivity(activity)
+                clearCurrentActivity()
             }
 
             override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
 
             override fun onActivityDestroyed(activity: Activity) {
-                clearCurrentActivity(activity)
+                clearCurrentActivity()
             }
         })
     }

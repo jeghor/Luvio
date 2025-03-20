@@ -6,7 +6,7 @@ interface ActivityProvider {
 
     fun setCurrentActivity(activity: Activity)
 
-    fun clearCurrentActivity(activity: Activity)
+    fun clearCurrentActivity()
 
     fun getActivity(): Activity?
 }
