@@ -35,6 +35,10 @@ android {
     }
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation(project(":sources:core:api"))
     implementation(project(":sources:ui_core"))
@@ -53,9 +57,12 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.serialization)
+
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    testRuntimeOnly(libs.junit.engine)
+    testImplementation(libs.test.coroutines)
+    testImplementation(libs.mockK)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
