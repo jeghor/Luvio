@@ -1,5 +1,9 @@
 package com.luvio.api
 
+/**
+ * Write about `BaseUrl.URL` to author email
+ * @property email eshklyarevsky@gmail.com
+ */
 object NetworkRoutes {
 
     object Auth {
