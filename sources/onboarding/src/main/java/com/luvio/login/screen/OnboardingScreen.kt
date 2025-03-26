@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -17,6 +18,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.luvio.core.api.mediator.AppWithFacade
 import com.luvio.login.di.OnboardingComponent
+import com.luvio.login.utils.TestTag
 import com.luvio.login.viewmodel.OnboardingState
 import com.luvio.login.viewmodel.OnboardingViewModel
 import com.luvio.ui_core.R
@@ -72,6 +74,7 @@ fun StepOnboardingContent(
             painter = painterResource(imageId),
             contentDescription = "step onboarding image",
             modifier = Modifier
+                .testTag(TestTag.ONBOARDING_IMAGE)
                 .constrainAs(image) {
                     top.linkTo(imageModifier)
                     start.linkTo(parent.start)
@@ -84,6 +87,7 @@ fun StepOnboardingContent(
 
         Text(
             modifier = Modifier
+                .testTag(TestTag.TEXT_TITLE)
                 .constrainAs(title) {
                     top.linkTo(image.bottom)
                     start.linkTo(parent.start)
@@ -98,6 +102,7 @@ fun StepOnboardingContent(
 
         Text(
             modifier = Modifier
+                .testTag(TestTag.TEXT_DESCRIPTION)
                 .constrainAs(description) {
                     top.linkTo(title.bottom)
                     start.linkTo(parent.start)
@@ -116,6 +121,7 @@ fun StepOnboardingContent(
 
         LuvioButton(
             modifier = Modifier
+                .testTag(TestTag.NEXT_BUTTON)
                 .constrainAs(nextButton) {
                     bottom.linkTo(skipButton.top)
                     start.linkTo(parent.start)
@@ -130,6 +136,7 @@ fun StepOnboardingContent(
 
         Text(
             modifier = Modifier
+                .testTag(TestTag.SKIP_BUTTON)
                 .constrainAs(skipButton) {
                     bottom.linkTo(skipButtonModifier)
                     start.linkTo(parent.start)

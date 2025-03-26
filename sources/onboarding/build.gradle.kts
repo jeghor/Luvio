@@ -63,6 +63,9 @@ dependencies {
     testImplementation(libs.test.coroutines)
     testImplementation(libs.mockK)
 
+    androidTestImplementation(libs.compose.ui.test)
+    androidTestImplementation(libs.compose.ui.test.manifest)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
