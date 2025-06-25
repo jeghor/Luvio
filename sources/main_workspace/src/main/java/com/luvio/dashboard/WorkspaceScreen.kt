@@ -30,25 +30,45 @@ fun WorkspaceScreen(
             screensMap.forEach { (screen, content) ->
                 when (screen) {
                     WorkspaceScreen.Home -> {
-                        composable<WorkspaceScreen.Home> {
+                        composable<WorkspaceScreen.Home>(
+                            enterTransition = { subtleHorizontalSlideIn(isPop = false) },
+                            exitTransition = { subtleHorizontalSlideOut(isPop = false) },
+                            popEnterTransition = { subtleHorizontalSlideIn(isPop = true) },
+                            popExitTransition = { subtleHorizontalSlideOut(isPop = true) }
+                        ) {
                             content()
                         }
                     }
 
                     WorkspaceScreen.LuvioMap -> {
-                        composable<WorkspaceScreen.LuvioMap> {
+                        composable<WorkspaceScreen.LuvioMap>(
+                            enterTransition = { subtleHorizontalSlideIn(isPop = false) },
+                            exitTransition = { subtleHorizontalSlideOut(isPop = false) },
+                            popEnterTransition = { subtleHorizontalSlideIn(isPop = true) },
+                            popExitTransition = { subtleHorizontalSlideOut(isPop = true) }
+                        ) {
                             content()
                         }
                     }
 
                     WorkspaceScreen.Favorites -> {
-                        composable<WorkspaceScreen.Favorites> {
+                        composable<WorkspaceScreen.Favorites>(
+                            enterTransition = { subtleHorizontalSlideIn(isPop = false) },
+                            exitTransition = { subtleHorizontalSlideOut(isPop = false) },
+                            popEnterTransition = { subtleHorizontalSlideIn(isPop = true) },
+                            popExitTransition = { subtleHorizontalSlideOut(isPop = true) }
+                        ) {
                             content()
                         }
                     }
 
                     WorkspaceScreen.Profile -> {
-                        composable<WorkspaceScreen.Profile> {
+                        composable<WorkspaceScreen.Profile>(
+                            enterTransition = { subtleHorizontalSlideIn(isPop = false) },
+                            exitTransition = { subtleHorizontalSlideOut(isPop = false) },
+                            popEnterTransition = { subtleHorizontalSlideIn(isPop = true) },
+                            popExitTransition = { subtleHorizontalSlideOut(isPop = true) }
+                        ) {
                             content()
                         }
                     }
@@ -77,9 +97,8 @@ fun BottomNavigationBar(navController: NavController) {
     )
 
     NavigationBar(
-        containerColor = AppTheme.colors.background,
-
-        ) {
+        containerColor = AppTheme.colors.background
+    ) {
         items.forEach { item ->
             val title = stringResource(item.title)
             val currentRoute = currentDestination?.route?.substringAfterLast(ROUT_DELIMITER)
