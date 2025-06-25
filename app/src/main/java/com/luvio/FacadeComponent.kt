@@ -2,8 +2,7 @@ package com.luvio
 
 import android.app.Application
 import com.luvio.api.di.NetworkProvider
-import com.luvio.core.api.mediator.AppProvider
-import com.luvio.core.api.mediator.ProvidersFacade
+import com.luvio.core.api.mediator.*
 import com.luvio.dashboard.di.WorkspaceExternalModule
 import com.luvio.login.LoginExternalModule
 import com.luvio.network.models.NetworkProvidersFactory

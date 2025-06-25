@@ -9,28 +9,28 @@ sealed class BottomNavItem(
     @StringRes val title: Int
 ) {
 
-    fun getNavRoute(): String = route.toString().substringBefore("@")
+    fun getNavRoute(): String = route.toString()
 
     data object Home : BottomNavItem(
-        com.luvio.dashboard.Home,
+        WorkspaceScreen.Home,
         com.luvio.ui_atoms.R.drawable.ic_home,
         com.luvio.ui_core.R.string.bottom_home
     )
 
     data object Map : BottomNavItem(
-        LuvioMap,
+        WorkspaceScreen.LuvioMap,
         com.luvio.ui_atoms.R.drawable.ic_map_paper,
         com.luvio.ui_core.R.string.bottom_map
     )
 
     data object Favorites : BottomNavItem(
-        com.luvio.dashboard.Favorites,
+        WorkspaceScreen.Favorites,
         com.luvio.ui_atoms.R.drawable.ic_favorites,
         com.luvio.ui_core.R.string.bottom_favorites
     )
 
     data object Profile : BottomNavItem(
-        com.luvio.dashboard.Profile,
+        WorkspaceScreen.Profile,
         com.luvio.ui_atoms.R.drawable.ic_profile,
         com.luvio.ui_core.R.string.bottom_profile
     )

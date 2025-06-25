@@ -4,9 +4,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import com.luvio.dashboard.*
+import com.luvio.home.screen.HomeScreen
 import com.luvio.login.Login
 import com.luvio.login.Onboarding
 import com.luvio.login.Registration
@@ -49,9 +51,25 @@ fun LuvioApp(
                         RegistrationScreen(navHostController)
                     }
 
-                    composable<Workspace> {
-                        WorkspaceScreen(navHostController)
+                    composable<WorkspaceScreen.Workspace> {
+                        WorkspaceScreen(
+                            screensMap = mapOf(
+                                WorkspaceScreen.Home to {
+                                    HomeScreen()
+                                },
+                                WorkspaceScreen.LuvioMap to {
+                                    TestScreen(stringResource(BottomNavItem.Map.title))
+                                },
+                                WorkspaceScreen.Favorites to {
+                                    TestScreen(stringResource(BottomNavItem.Favorites.title))
+                                },
+                                WorkspaceScreen.Profile to {
+                                    TestScreen(stringResource(BottomNavItem.Profile.title))
+                                },
+                            )
+                        )
                     }
+
                 }
             }
         }

@@ -1,22 +1,20 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.kapt)
 }
 
 android {
-    namespace = "com.luvio"
+    namespace = "com.luvio.home"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.luvio"
-        minSdk = 26
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -35,30 +33,18 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
 
 dependencies {
+    implementation(project(":sources:core"))
     implementation(project(":sources:core:api"))
-    implementation(project(":sources:core:impl"))
-    implementation(project(":sources:network"))
     implementation(project(":sources:ui_core"))
-    implementation(project(":sources:onboarding"))
-    implementation(project(":sources:login"))
-    implementation(project(":sources:login:api"))
-    implementation(project(":sources:main_workspace"))
-    implementation(project(":sources:main_workspace:api"))
-    implementation(project(":sources:home"))
+    implementation(project(":sources:ui_atoms"))
+    implementation(project(":sources:network:api"))
     implementation(project(":sources:home:api"))
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -66,13 +52,14 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation)
+    implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.serialization)
 
     testImplementation(libs.junit)
     testRuntimeOnly(libs.junit.engine)
     testImplementation(libs.test.coroutines)
     testImplementation(libs.mockK)
 
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 

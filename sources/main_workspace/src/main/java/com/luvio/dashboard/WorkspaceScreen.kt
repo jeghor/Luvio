@@ -7,13 +7,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.*
+import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import com.luvio.ui_core.theme.AppTheme
 
 @Composable
 fun WorkspaceScreen(
-    parentNavController: NavHostController
+    screensMap: Map<WorkspaceScreen, @Composable () -> Unit>
 ) {
     val bottomNavController = rememberNavController()
 
@@ -24,24 +24,45 @@ fun WorkspaceScreen(
     ) { paddingValues: PaddingValues ->
         NavHost(
             navController = bottomNavController,
-            startDestination = Home,
+            startDestination = WorkspaceScreen.Home,
             modifier = Modifier.padding(paddingValues)
         ) {
-            composable<Home> {
-                TestScreen(stringResource(BottomNavItem.Home.title))
-            }
-            composable<LuvioMap> {
-                TestScreen(stringResource(BottomNavItem.Map.title))
-            }
-            composable<Favorites> {
-                TestScreen(stringResource(BottomNavItem.Favorites.title))
-            }
-            composable<Profile> {
-                TestScreen(stringResource(BottomNavItem.Profile.title))
+            screensMap.forEach { (screen, content) ->
+                when (screen) {
+                    WorkspaceScreen.Home -> {
+                        composable<WorkspaceScreen.Home> {
+                            content()
+                        }
+                    }
+
+                    WorkspaceScreen.LuvioMap -> {
+                        composable<WorkspaceScreen.LuvioMap> {
+                            content()
+                        }
+                    }
+
+                    WorkspaceScreen.Favorites -> {
+                        composable<WorkspaceScreen.Favorites> {
+                            content()
+                        }
+                    }
+
+                    WorkspaceScreen.Profile -> {
+                        composable<WorkspaceScreen.Profile> {
+                            content()
+                        }
+                    }
+
+                    else -> {
+                        /*no-op*/
+                    }
+                }
             }
         }
     }
 }
+
+private const val ROUT_DELIMITER = "."
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
@@ -61,8 +82,9 @@ fun BottomNavigationBar(navController: NavController) {
         ) {
         items.forEach { item ->
             val title = stringResource(item.title)
+            val currentRoute = currentDestination?.route?.substringAfterLast(ROUT_DELIMITER)
             NavigationBarItem(
-                selected = currentDestination?.route == item.getNavRoute(),
+                selected = currentRoute == item.getNavRoute(),
                 onClick = { navController.navigate(item.route) },
                 icon = {
                     Icon(

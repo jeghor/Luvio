@@ -2,21 +2,20 @@ package com.luvio.dashboard
 
 import kotlinx.serialization.Serializable
 
-/**
- * Remove after adding relevant modules
- * */
+sealed interface WorkspaceScreen {
 
-@Serializable
-object Workspace
+    @Serializable
+    data object Workspace : WorkspaceScreen
 
-@Serializable
-object Home
+    @Serializable
+    data object Home : WorkspaceScreen
 
-@Serializable
-object LuvioMap
+    @Serializable
+    data object LuvioMap : WorkspaceScreen
 
-@Serializable
-object Favorites
+    @Serializable
+    data object Favorites : WorkspaceScreen
 
-@Serializable
-object Profile
+    @Serializable
+    data object Profile : WorkspaceScreen
+}

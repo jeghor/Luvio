@@ -10,6 +10,6 @@ class WorkspaceMediatorImpl @Inject constructor(
 ): WorkspaceMediator {
 
     override fun openWorkspace() {
-        (activityProvider.getActivity() as? Navigator)?.getController()?.navigate(Workspace)
+        (activityProvider.getActivity() as? Navigator)?.getController()?.navigate(WorkspaceScreen.Workspace)
     }
 }
