@@ -20,7 +20,8 @@ fun WorkspaceScreen(
     Scaffold(
         bottomBar = {
             BottomNavigationBar(bottomNavController)
-        }
+        },
+        containerColor = AppTheme.colors.background
     ) { paddingValues: PaddingValues ->
         NavHost(
             navController = bottomNavController,

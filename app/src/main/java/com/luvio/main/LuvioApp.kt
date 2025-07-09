@@ -15,6 +15,7 @@ import com.luvio.login.Registration
 import com.luvio.login.screen.LoginScreen
 import com.luvio.login.screen.OnboardingScreen
 import com.luvio.login.screen.RegistrationScreen
+import com.luvio.map.screen.MapScreen
 import com.luvio.ui_core.theme.AppTheme
 import com.luvio.ui_core.theme.LuvioTheme
 
@@ -58,7 +59,7 @@ fun LuvioApp(
                                     HomeScreen()
                                 },
                                 WorkspaceScreen.LuvioMap to {
-                                    TestScreen(stringResource(BottomNavItem.Map.title))
+                                    MapScreen()
                                 },
                                 WorkspaceScreen.Favorites to {
                                     TestScreen(stringResource(BottomNavItem.Favorites.title))

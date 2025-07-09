@@ -1,12 +1,13 @@
 package com.luvio.main
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import androidx.activity.*
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
+import androidx.compose.ui.graphics.toArgb
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.luvio.core.api.mediator.*
+import com.luvio.ui_core.theme.AppColors
 import javax.inject.Inject
 
 class MainActivity : ComponentActivity(), Navigator {
@@ -20,7 +21,12 @@ class MainActivity : ComponentActivity(), Navigator {
         super.onCreate(savedInstanceState)
         MainComponent.create((application as AppWithFacade).getFacade()).inject(this)
 
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.light(
+                AppColors.transparent.toArgb(),
+                AppColors.textPrimary.toArgb()
+            )
+        )
         setContent {
             navController = rememberNavController()
             LuvioApp(navController!!)

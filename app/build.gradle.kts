@@ -56,6 +56,7 @@ dependencies {
     implementation(project(":sources:main_workspace:api"))
     implementation(project(":sources:home"))
     implementation(project(":sources:home:api"))
+    implementation(project(":sources:map"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
