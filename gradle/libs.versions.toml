@@ -22,7 +22,7 @@ serialization = "1.8.0"
 serialization-plugin = "2.0.20"
 navigationRuntimeKtx = "2.8.7"
 ktor = "3.1.1"
-mapTiler = "10.0.2"
+mapTiler = "11.11.0"
 
 [libraries]
 # Core

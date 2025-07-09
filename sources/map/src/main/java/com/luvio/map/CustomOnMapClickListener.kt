@@ -1,14 +1,14 @@
 package com.luvio.map
 
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
-import com.mapbox.mapboxsdk.geometry.LatLng
-import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import org.maplibre.android.camera.CameraUpdateFactory
+import org.maplibre.android.geometry.LatLng
+import org.maplibre.android.maps.MapLibreMap
+import org.maplibre.android.style.sources.GeoJsonSource
 
 class CustomOnMapClickListener(
-    private val map: MapboxMap,
+    private val map: MapLibreMap,
     private val onSinglePointClickCallback: OnSinglePointClickCallback
-) : MapboxMap.OnMapClickListener {
+) : MapLibreMap.OnMapClickListener {
 
     override fun onMapClick(point: LatLng): Boolean {
 

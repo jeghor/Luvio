@@ -16,18 +16,18 @@ import com.google.android.gms.location.LocationServices
 import com.luvio.map.*
 import com.luvio.ui_atoms.R
 import com.luvio.ui_core.theme.AppColors
-import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.camera.CameraPosition
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
-import com.mapbox.mapboxsdk.geometry.LatLng
-import com.mapbox.mapboxsdk.maps.*
-import com.mapbox.mapboxsdk.style.expressions.Expression
-import com.mapbox.mapboxsdk.style.layers.CircleLayer
-import com.mapbox.mapboxsdk.style.layers.Property.ICON_ANCHOR_BOTTOM
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
-import com.mapbox.mapboxsdk.style.layers.SymbolLayer
-import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import org.maplibre.android.MapLibre
+import org.maplibre.android.camera.CameraPosition
+import org.maplibre.android.camera.CameraUpdateFactory
+import org.maplibre.android.geometry.LatLng
+import org.maplibre.android.maps.*
+import org.maplibre.android.style.expressions.Expression
+import org.maplibre.android.style.layers.CircleLayer
+import org.maplibre.android.style.layers.Property.ICON_ANCHOR_BOTTOM
+import org.maplibre.android.style.layers.PropertyFactory.*
+import org.maplibre.android.style.layers.SymbolLayer
+import org.maplibre.android.style.sources.GeoJsonOptions
+import org.maplibre.android.style.sources.GeoJsonSource
 
 @SuppressLint("MissingPermission")
 @OptIn(ExperimentalPermissionsApi::class)
@@ -37,7 +37,7 @@ fun CustomMapView() {
     val mapView = rememberMapViewWithLifecycle(context)
     val locationPermissionState = rememberPermissionState(android.Manifest.permission.ACCESS_FINE_LOCATION)
     var userLocation by remember { mutableStateOf<LatLng?>(null) }
-    var mapboxMap by remember { mutableStateOf<MapboxMap?>(null) }
+    var mapboxMap by remember { mutableStateOf<MapLibreMap?>(null) }
 
     LaunchedEffect(Unit) {
         locationPermissionState.launchPermissionRequest()
@@ -117,7 +117,10 @@ fun CustomMapView() {
 
                         style.addLayer(singlePointLayer)
 
-                        val clusterCircleLayer = CircleLayer(MapUtil.CIRCLE_POINT_LAYER_ID, MapUtil.CUSTOM_SOURCE_ID)
+                        val clusterCircleLayer = CircleLayer(
+                            MapUtil.CIRCLE_POINT_LAYER_ID,
+                            MapUtil.CUSTOM_SOURCE_ID
+                        )
                             .withProperties(
                                 circleColor(AppColors.background.toArgb()),
                                 circleStrokeColor(AppColors.primary.toArgb()),
@@ -165,7 +168,7 @@ fun CustomMapView() {
 
 @Composable
 fun rememberMapViewWithLifecycle(context: Context): MapView {
-    Mapbox.getInstance(context)
+    MapLibre.getInstance(context)
 
     val mapView = remember {
         MapView(context)

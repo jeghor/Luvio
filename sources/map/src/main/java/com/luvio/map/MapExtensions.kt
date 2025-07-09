@@ -2,13 +2,13 @@ package com.luvio.map
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
-import com.mapbox.mapboxsdk.location.modes.CameraMode
-import com.mapbox.mapboxsdk.location.modes.RenderMode
-import com.mapbox.mapboxsdk.maps.MapboxMap
+import org.maplibre.android.location.LocationComponentActivationOptions
+import org.maplibre.android.location.modes.CameraMode
+import org.maplibre.android.location.modes.RenderMode
+import org.maplibre.android.maps.MapLibreMap
 
 @SuppressLint("MissingPermission")
-fun MapboxMap.enableUserLocation(context: Context) {
+fun MapLibreMap.enableUserLocation(context: Context) {
     val locationComponent = locationComponent
 
     val locationComponentActivationOptions =

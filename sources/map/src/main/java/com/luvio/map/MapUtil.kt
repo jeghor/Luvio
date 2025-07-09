@@ -1,6 +1,6 @@
 package com.luvio.map
 
-import com.mapbox.mapboxsdk.geometry.LatLng
+import org.maplibre.android.geometry.LatLng
 
 object MapUtil {
 
