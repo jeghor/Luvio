@@ -40,4 +40,8 @@
     <string name="bottom_map">Карта</string>
     <string name="bottom_favorites">Избранное</string>
     <string name="bottom_profile">Профиль</string>
+
+    <!--Map-->
+    <string name="my_routes">Мои маршруты</string>
+
 </resources>
